@@ -1,0 +1,206 @@
+{
+  "info": {
+    "name": "Somos Ayni — habilidades-service",
+    "description": "Endpoints del habilidades-service (puerto 8085). Requiere JWT de identidad-service (puerto 8081).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_IDENTIDAD",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "BASE_PERFILES",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "BASE_RETOS",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "BASE_POSTULACIONES",
+      "value": "http://localhost:8084"
+    },
+    {
+      "key": "BASE_HABILIDADES",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "BASE_NOTIFICACIONES",
+      "value": "http://localhost:8086"
+    },
+    {
+      "key": "BASE_METRICAS",
+      "value": "http://localhost:8087"
+    },
+    {
+      "key": "TOKEN_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "TOKEN_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "ID_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "ID_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "RETO_ID",
+      "value": ""
+    },
+    {
+      "key": "POSTULACION_ID",
+      "value": ""
+    },
+    {
+      "key": "NOTIFICACION_ID",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Otorgar Insignia",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_EMPRESA}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_HABILIDADES}}/api/v1/insignias",
+          "host": [
+            "{{BASE_HABILIDADES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "insignias"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"talentoId\":\"{{ID_TALENTO}}\",\"retoId\":\"{{RETO_ID}}\",\"titulo\":\"API REST con Spring Boot\",\"tipo\":\"VERIFICADO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Ver Insignias del Talento",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_HABILIDADES}}/api/v1/insignias/talento/{{ID_TALENTO}}",
+          "host": [
+            "{{BASE_HABILIDADES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "insignias",
+            "talento",
+            "{{ID_TALENTO}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Registrar Habilidad",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_HABILIDADES}}/api/v1/habilidades",
+          "host": [
+            "{{BASE_HABILIDADES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "habilidades"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\"nombre\":\"Spring Boot\",\"nivel\":\"AVANZADO\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Ver Portafolio Talento",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_TALENTO}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_HABILIDADES}}/api/v1/habilidades/portafolio/{{ID_TALENTO}}",
+          "host": [
+            "{{BASE_HABILIDADES}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "habilidades",
+            "portafolio",
+            "{{ID_TALENTO}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_HABILIDADES}}/actuator/health",
+          "host": [
+            "{{BASE_HABILIDADES}}"
+          ],
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      }
+    }
+  ]
+}
